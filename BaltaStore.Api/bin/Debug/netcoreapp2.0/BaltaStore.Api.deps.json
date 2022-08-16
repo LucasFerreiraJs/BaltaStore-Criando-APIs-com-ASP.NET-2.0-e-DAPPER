@@ -23,6 +23,8 @@
     ".NETCoreApp,Version=v2.0": {
       "BaltaStore.Api/1.0.0": {
         "dependencies": {
+          "BaltaStore.Domain": "1.0.0",
+          "BaltaStore.Shared": "1.0.0",
           "FluentValidator": "2.0.2",
           "Microsoft.AspNetCore.All": "2.0.9",
           "Microsoft.NETCore.App": "2.0.0"
@@ -3806,6 +3808,29 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "BaltaStore.Domain/1.0.0": {
+        "dependencies": {
+          "BaltaStore.Shared": "1.0.0",
+          "FluentValidator": "2.0.2"
+        },
+        "runtime": {
+          "BaltaStore.Domain.dll": {}
+        },
+        "compile": {
+          "BaltaStore.Domain.dll": {}
+        }
+      },
+      "BaltaStore.Shared/1.0.0": {
+        "dependencies": {
+          "FluentValidator": "2.0.2"
+        },
+        "runtime": {
+          "BaltaStore.Shared.dll": {}
+        },
+        "compile": {
+          "BaltaStore.Shared.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -5998,6 +6023,16 @@
       "sha512": "sha512-W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
+    },
+    "BaltaStore.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BaltaStore.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.NETCore.App/2.0.0": {
       "type": "package",

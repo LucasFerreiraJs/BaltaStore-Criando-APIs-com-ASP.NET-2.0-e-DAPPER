@@ -4758,6 +4758,33 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "BaltaStore.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "BaltaStore.Shared": "1.0.0",
+          "FluentValidator": "2.0.2"
+        },
+        "compile": {
+          "bin/placeholder/BaltaStore.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BaltaStore.Domain.dll": {}
+        }
+      },
+      "BaltaStore.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "FluentValidator": "2.0.2"
+        },
+        "compile": {
+          "bin/placeholder/BaltaStore.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BaltaStore.Shared.dll": {}
+        }
       }
     }
   },
@@ -13141,10 +13168,22 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "BaltaStore.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BaltaStore.Domain/BaltaStore.Domain.csproj",
+      "msbuildProject": "../BaltaStore.Domain/BaltaStore.Domain.csproj"
+    },
+    "BaltaStore.Shared/1.0.0": {
+      "type": "project",
+      "path": "../BaltaStore.Shared/BaltaStore.Shared.csproj",
+      "msbuildProject": "../BaltaStore.Shared/BaltaStore.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "BaltaStore.Domain >= 1.0.0",
+      "BaltaStore.Shared >= 1.0.0",
       "FluentValidator >= 2.0.2",
       "Microsoft.AspNetCore.All >= 2.0.9",
       "Microsoft.NETCore.App >= 2.0.0"
@@ -13183,7 +13222,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "targetAlias": "netcoreapp2.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Domain\\BaltaStore.Domain.csproj": {
+              "projectPath": "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Domain\\BaltaStore.Domain.csproj"
+            },
+            "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Shared\\BaltaStore.Shared.csproj": {
+              "projectPath": "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Shared\\BaltaStore.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -16,6 +16,8 @@ namespace BaltaStore.Api
         // services
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMvc();
         }
 
       
@@ -26,10 +28,7 @@ namespace BaltaStore.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc();
         }
     }
 }
