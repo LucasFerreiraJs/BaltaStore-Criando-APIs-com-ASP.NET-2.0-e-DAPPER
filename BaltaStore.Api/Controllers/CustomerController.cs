@@ -1,4 +1,6 @@
-﻿using BaltaStore.Domain.StoreContext.Entities;
+﻿using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Input;
+using BaltaStore.Domain.StoreContext.Entities;
+using BaltaStore.Domain.StoreContext.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,34 +15,68 @@ namespace BaltaStore.Api.Controllers
         public List<Customer> Get()
         {
 
-            return null;
+            var name = new Name("André", "Baltieri");
+            var document = new Document("46718115533");
+            var email = new Email("hello@balta.io");
+            var customer = new Customer(name, document, email, "551999876542");
+            var customers = new List<Customer>();
+            customers.Add(customer);
+
+            return customers;
 
         }
 
         [HttpGet]
-        [Route("Customer/{id}")]
+        [Route("customer/{id}")]
         public Customer GetById(Guid id)
         {
+            var name = new Name("André", "Baltieri");
+            var document = new Document("46718115533");
+            var email = new Email("hello@balta.io");
+            var customer = new Customer(name, document, email, "551999876542");
 
-            return null;
+            return customer;
         }
 
         [HttpGet]
-        [Route("Customer/{id}/orders")]
+        [Route("customer/{id}/orders")]
         public List<Order> GetOrders(Guid id)
         {
+            var name = new Name("André", "Baltieri");
+            var document = new Document("46718115533");
+            var email = new Email("hello@balta.io");
+            var customer = new Customer(name, document, email, "551999876542");
+            var order = new Order(customer);
+            
+            var mouse = new Product("Mouse Gamer", "Mouse Gamer", "mouse.jpg", 100M, 10);
+            var keyboard = new Product("Teclado Gamer", "Teclado Gamer", "Teclado.jpg", 100M, 10);
+            var chair = new Product("Cadeira Gamer", "Cadeira Gamer", "Cadeira.jpg", 100M, 10);
+            var monitor = new Product("Monitor Gamer", "Monitor Gamer", "Monitor.jpg", 100M, 10);
 
-            return null;
+            order.AddItem(mouse, 5);
+            order.AddItem(keyboard, 4);
+            order.AddItem(chair, 2);
+            order.AddItem(monitor, 1);
+
+            var orders = new List<Order>();
+            orders.Add(order);
+            return orders;
         }
 
 
         [HttpPost]
         [Route("customers")]
         public Customer Post(
-            [FromBody] Customer customer
+            [FromBody] CreateCustomerCommand command
             )
         {
-            return null;
+
+            var name = new Name(command.FirstName, command.LastName);
+            var document = new Document(command.Document);
+            var email = new Email(command.EMail);
+            var customer = new Customer(name, document, email, command.Phone);
+
+            return customer;
         }
 
 
@@ -49,20 +85,25 @@ namespace BaltaStore.Api.Controllers
         [Route("customers/{id}")]
         public Customer Put(
             Guid id,
-           [FromBody] Customer customer
+           [FromBody] CreateCustomerCommand command
             )
         {
-            return null;
+            var name = new Name(command.FirstName, command.LastName);
+            var document = new Document(command.Document);
+            var email = new Email(command.EMail);
+            var customer = new Customer(name, document, email, command.Phone);
+
+            return customer;
         }
 
 
         [HttpDelete]
         [Route("customers/{id}")]
-        public string Delete(
+        public object Delete(
             Guid id
             )
         {
-            return null;
+            return new { message = "cliente removido com sucesso"};
         }
 
 
