@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "xFNT6BOfYuPzl8jEjT2xSalSewZPeXzIdwFPHXjgZ6AlNaxS3pTEIXU6S62/4IsQZvLnywOJe5ZG+o6Y7Gbyjg==",
+  "success": true,
+  "projectFilePath": "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Domain\\BaltaStore.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\casfe\\.nuget\\packages\\fluentvalidator\\2.0.2\\fluentvalidator.2.0.2.nupkg.sha512",
+    "C:\\Users\\casfe\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\casfe\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
