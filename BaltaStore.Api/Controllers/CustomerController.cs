@@ -1,6 +1,11 @@
 ﻿using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Input;
+using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using BaltaStore.Domain.StoreContext.Entities;
+using BaltaStore.Domain.StoreContext.Handlers;
+using BaltaStore.Domain.StoreContext.Queries;
+using BaltaStore.Domain.StoreContext.Repositories;
 using BaltaStore.Domain.StoreContext.ValueObjects;
+using BaltaStore.Shared.Commands;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,101 +15,88 @@ namespace BaltaStore.Api.Controllers
     public class CustomerController : Controller
     {
 
+        private readonly ICustomerRepository _repository;
+        private readonly CustomerHandler _handler;
+
+        public CustomerController(ICustomerRepository repository, CustomerHandler handler)
+        {
+            _repository = repository;
+            _handler = handler;
+        }
+
+
         [HttpGet]
         [Route("customers")]
-        public List<Customer> Get()
+        [ResponseCache(Duration = 60)]
+        public IEnumerable<ListCustomerQueryResult> Get()
         {
 
-            var name = new Name("André", "Baltieri");
-            var document = new Document("46718115533");
-            var email = new Email("hello@balta.io");
-            var customer = new Customer(name, document, email, "551999876542");
-            var customers = new List<Customer>();
-            customers.Add(customer);
-
+            var customers = _repository.Get();
             return customers;
 
         }
 
         [HttpGet]
-        [Route("customer/{id}")]
-        public Customer GetById(Guid id)
+        [Route("customers/{id:Guid}")]
+        public GetCustomerQueryResult GetById(Guid id)
         {
-            var name = new Name("André", "Baltieri");
-            var document = new Document("46718115533");
-            var email = new Email("hello@balta.io");
-            var customer = new Customer(name, document, email, "551999876542");
-
+            var customer = _repository.GetCustomer(id);
             return customer;
         }
 
         [HttpGet]
-        [Route("customer/{id}/orders")]
-        public List<Order> GetOrders(Guid id)
+        [Route("customers/{id}/orders")]
+        public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         {
-            var name = new Name("André", "Baltieri");
-            var document = new Document("46718115533");
-            var email = new Email("hello@balta.io");
-            var customer = new Customer(name, document, email, "551999876542");
-            var order = new Order(customer);
-            
-            var mouse = new Product("Mouse Gamer", "Mouse Gamer", "mouse.jpg", 100M, 10);
-            var keyboard = new Product("Teclado Gamer", "Teclado Gamer", "Teclado.jpg", 100M, 10);
-            var chair = new Product("Cadeira Gamer", "Cadeira Gamer", "Cadeira.jpg", 100M, 10);
-            var monitor = new Product("Monitor Gamer", "Monitor Gamer", "Monitor.jpg", 100M, 10);
-
-            order.AddItem(mouse, 5);
-            order.AddItem(keyboard, 4);
-            order.AddItem(chair, 2);
-            order.AddItem(monitor, 1);
-
-            var orders = new List<Order>();
-            orders.Add(order);
+            var orders = _repository.GetOrders(id);
             return orders;
         }
 
 
         [HttpPost]
         [Route("customers")]
-        public Customer Post(
+        //public CreateCustomerCommandResult Post(
+        public Object Post(
             [FromBody] CreateCustomerCommand command
             )
         {
 
-            var name = new Name(command.FirstName, command.LastName);
-            var document = new Document(command.Document);
-            var email = new Email(command.EMail);
-            var customer = new Customer(name, document, email, command.Phone);
+            var result = (CreateCustomerCommandResult)_handler.Handle(command);
+            if (_handler.Invalid)
+            {
+                return BadRequest(_handler.Notifications);
+            }
 
-            return customer;
+
+            return result;
         }
 
 
 
-        [HttpPut]
-        [Route("customers/{id}")]
-        public Customer Put(
-            Guid id,
-           [FromBody] CreateCustomerCommand command
-            )
-        {
-            var name = new Name(command.FirstName, command.LastName);
-            var document = new Document(command.Document);
-            var email = new Email(command.EMail);
-            var customer = new Customer(name, document, email, command.Phone);
+        //[HttpPut]
+        //[Route("customers/{id}")]
+        //public Customer Put(
+        //    Guid id,
+        //   [FromBody] CreateCustomerCommand command
+        //    )
+        //{
+        //    var name = new Name(command.FirstName, command.LastName);
+        //    var document = new Document(command.Document);
+        //    var email = new Email(command.EMail);
+        //    var customer = new Customer(name, document, email, command.Phone);
 
-            return customer;
-        }
+        //    return customer;
+        //}
 
 
-        [HttpDelete]
-        [Route("customers/{id}")]
-        public object Delete(
-            Guid id
-            )
-        {
-            return new { message = "cliente removido com sucesso"};
-        }
+        //[HttpDelete]
+        //[Route("customers/{id}")]
+        //public object Delete(Guid id)
+        //{
+
+
+        //    return new { message = "cliente removido com sucesso" };
+        //}
 
 
     }

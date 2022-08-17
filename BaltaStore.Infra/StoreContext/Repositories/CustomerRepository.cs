@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace BaltaStore.Infra.StoreContext.Repositories
 {
@@ -103,5 +102,39 @@ namespace BaltaStore.Infra.StoreContext.Repositories
                 ).FirstOrDefault();
         }
 
+        public IEnumerable<ListCustomerQueryResult> Get()
+        {
+
+            // List -> tem que colocar toList(); ao final da query
+            return _context
+                .Connection
+                .Query<ListCustomerQueryResult>(
+                    @"select 
+                        [Id],
+                        concat([Firstname], ' ', [Lastname]) as [Name],
+                        [Document],
+                        [Email]
+                    from
+                        [Customer]
+                    ", new { }
+                );
+        }
+
+        public GetCustomerQueryResult GetCustomer(Guid id)
+        {
+            return
+               _context
+               .Connection
+               .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer] WHERE [Id]=@id", new { id = id })
+               .FirstOrDefault();
+        }
+
+        public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
+        {
+            return
+              _context
+              .Connection
+              .Query<ListCustomerOrdersQueryResult>("", new { id = id });
+        }
     }
 }

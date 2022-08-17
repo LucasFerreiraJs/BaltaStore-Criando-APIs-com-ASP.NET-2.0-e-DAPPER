@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dh3dn1+onBzvkN/8JOshnsc0T5Az9AZM9xvt0JWNxxjsSqsysEalgKQhjYhkuYK6gY8q5SpLE0IYp0pPphHx+Q==",
+  "dgSpecHash": "Noh6Xx8RwkjO3d5Re8qdAPMJvouoMTRq7z9siPK3tSFkEq4sek206003ZmMgsPgHCYhbcPRI69ndMzUGJE7JcQ==",
   "success": true,
   "projectFilePath": "F:\\www\\baltaio\\BaltaStore-Criando-APIs-com-ASP.NET-2.0-e-DAPPER\\BaltaStore.Api\\BaltaStore.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\casfe\\.nuget\\packages\\dapper\\1.50.2\\dapper.1.50.2.nupkg.sha512",
     "C:\\Users\\casfe\\.nuget\\packages\\fluentvalidator\\2.0.2\\fluentvalidator.2.0.2.nupkg.sha512",
     "C:\\Users\\casfe\\.nuget\\packages\\libuv\\1.10.0\\libuv.1.10.0.nupkg.sha512",
     "C:\\Users\\casfe\\.nuget\\packages\\microsoft.applicationinsights\\2.4.0\\microsoft.applicationinsights.2.4.0.nupkg.sha512",
