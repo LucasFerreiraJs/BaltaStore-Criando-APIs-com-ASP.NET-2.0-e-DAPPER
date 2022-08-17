@@ -1,4 +1,5 @@
-﻿using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Input;
+﻿
+using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using BaltaStore.Domain.StoreContext.Entities;
 using BaltaStore.Domain.StoreContext.Handlers;
@@ -56,18 +57,12 @@ namespace BaltaStore.Api.Controllers
         [HttpPost]
         [Route("customers")]
         //public CreateCustomerCommandResult Post(
-        public Object Post(
+        public ICommandResult Post(
             [FromBody] CreateCustomerCommand command
             )
         {
 
             var result = (CreateCustomerCommandResult)_handler.Handle(command);
-            if (_handler.Invalid)
-            {
-                return BadRequest(_handler.Notifications);
-            }
-
-
             return result;
         }
 

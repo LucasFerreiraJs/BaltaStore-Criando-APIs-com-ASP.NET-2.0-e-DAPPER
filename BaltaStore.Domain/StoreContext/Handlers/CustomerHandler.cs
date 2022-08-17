@@ -1,4 +1,4 @@
-﻿using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Input;
+﻿
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
 using BaltaStore.Domain.StoreContext.Entities;
@@ -62,7 +62,7 @@ namespace BaltaStore.Domain.StoreContext.Handlers
 
             if (Invalid)
             {
-                return null;
+                return new CommandResult(true, "Por Favor, corrija os campos abaixo", Notifications);
             }
 
             // persistir no banco
@@ -71,7 +71,12 @@ namespace BaltaStore.Domain.StoreContext.Handlers
             // Enviar email de boas Vindas
             _emailService.Send(email.Address, "Hello@balta.io", "Bem Vindo", "Seja bem vindo ao balta io");
 
-            return new CreateCustomerCommandResult(customer.Id, name.ToString(), email.Address);
+            return new CommandResult(true, "Bem vindo ao balta Store", new
+            {
+                Id = customer.Id,
+                Name = name.ToString(),
+                Email = email.Address
+            });
         }
 
         public ICommandResult Handle(AddAddressCommand command)

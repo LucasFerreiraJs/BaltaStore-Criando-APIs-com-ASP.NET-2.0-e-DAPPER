@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace BaltaStore.Api
 {
@@ -24,6 +25,7 @@ namespace BaltaStore.Api
         {
 
             services.AddMvc();
+            services.AddResponseCompression();
 
             //<dominio, infra>
             //cria 1 e mantém na memória
@@ -34,6 +36,10 @@ namespace BaltaStore.Api
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<CustomerHandler, CustomerHandler>();
 
+
+            services.AddSwaggerGen(x => {
+                x.SwaggerDoc("v1", new Info { Title = "Balta Store", Version = "v1" });
+            });
         }
 
       
@@ -45,6 +51,14 @@ namespace BaltaStore.Api
             }
 
             app.UseMvc();
+            app.UseResponseCompression();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Balta Store - V1");
+            });
+
         }
     }
 }

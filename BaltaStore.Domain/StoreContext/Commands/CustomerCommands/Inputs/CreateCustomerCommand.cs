@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Input
+namespace BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs
 {
     public class CreateCustomerCommand : Notifiable, ICommand
     {
